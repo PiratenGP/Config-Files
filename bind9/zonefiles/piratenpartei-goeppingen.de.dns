@@ -1,0 +1,15 @@
+$ORIGIN .
+$TTL 3600	; 1 hour
+piratenpartei-goeppingen.de IN SOA ns1.hyte.eu. hostmaster.b-dns.eu. (
+				3  ; serial
+				10000      ; refresh (2 hours 46 minutes 40 seconds)
+				1800       ; retry (30 minutes)
+				604800     ; expire (1 week)
+				3600       ; minimum (1 hour)
+				)
+			NS	ns1.hyte.eu.
+			NS	ns2.hyte.eu.
+			A	88.198.51.179
+			MX	10 mail.hyte.eu.
+$ORIGIN piratenpartei-goeppingen.de.
+*			A	88.198.51.179

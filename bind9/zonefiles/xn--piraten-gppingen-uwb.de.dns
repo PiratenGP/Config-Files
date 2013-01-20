@@ -1,0 +1,16 @@
+$ORIGIN .
+$TTL 3600	; 1 hour
+xn--piraten-gppingen-uwb.de		IN SOA	ns1.b-dns.eu. hostmaster.b-dns.eu. (
+                                2 ; serial
+                                10800      ; refresh (3 hours)
+                                1800       ; retry (30 minutes)
+                                604800     ; expire (1 week)
+                                3600       ; minimum (1 hour)
+				
+)
+			NS	ns1.hyte.eu.
+			NS	ns2.hyte.eu.
+			A	88.198.51.179
+			MX	10 mail.hyte.eu.
+$ORIGIN xn--piraten-gppingen-uwb.de.
+www			A	88.198.51.179
