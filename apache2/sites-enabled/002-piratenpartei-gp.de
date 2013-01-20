@@ -1,0 +1,43 @@
+<VirtualHost *:80>
+   Redirect permanent / https://piratenpartei-gp.de/
+
+	ServerAdmin webmaster@localhost
+	ServerName piratenpartei-gp.de
+	ServerAlias www.piratenpartei-gp.de piraten-goeppingen.de piraten-gp.de piraten-göppingen.de piratengoeppingen.de piratengp.de piratenpartei-goeppingen.de piratenparteigoeppingen.de piratenparteigp.de ppgp.de  www.piraten-oeppingen.de  www.piraten-gp.de www.piraten-göppingen.de www.piratengoeppingen.de www.piratengp.de www.piratenpartei-goeppingen.de www.piratenparteigoeppingen.de  www.piratenparteigp.de www.ppgp.de *.piraten-goeppingen.de *.piraten-gp.de *.piraten-göppingen.de *.piratengoeppingen.de *.piratengp.de *.piratenpartei-goeppingen.de *.piratenparteigoeppingen.de *.piratenparteigp.de *.ppgp.de xn--piraten-gppingen-uwb.de www.xn--piraten-gppingen-uwb.de *.xn--piraten-gppingen-uwb.de
+	ErrorLog /home/piratengp/logs/piratenpartei-gp.de_error.log
+	LogLevel warn
+	CustomLog /home/piratengp/logs/piratenpartei-gp.de_access.log combined
+</VirtualHost>
+
+<VirtualHost *:443>
+SSLEngine On
+SSLCertificateFile /home/piratengp/certs/piratenpartei-gp.de.crt
+SSLCertificateKeyFile /home/piratengp/certs/piratenpartei-gp.de.key
+SSLHonorCipherOrder On
+SSLCipherSuite ECDHE-RSA-AES128-SHA256:AES128-GCM-SHA256:RC4:HIGH:!MD5:!aNULL:!EDH
+
+	ServerAdmin webmaster@localhost
+	ServerName piratenpartei-gp.de
+	DocumentRoot /home/piratengp/html/piratenpartei-gp.de
+	<Directory />
+		Options FollowSymLinks
+		AllowOverride All
+	</Directory>
+	<Directory /home/piratengp/html/piratenpartei-gp.de/>
+		Options Indexes FollowSymLinks MultiViews
+		AllowOverride All
+		Order allow,deny
+		allow from all
+	</Directory>
+
+        <IfModule mod_fastcgi.c>
+                AddHandler piratengp-ssl-php-fcgi .php
+                Action piratengp-ssl-php-fcgi /piratengp-ssl-php-fcgi
+                Alias /piratengp-ssl-php-fcgi /usr/lib/cgi-bin/piratengp-ssl-php5-fcgi
+		FastCgiExternalServer /usr/lib/cgi-bin/piratengp-ssl-php5-fcgi -socket /home/php5-fpm/sockets/piratengp-php.sock -pass-header Authorization
+        </IfModule>
+
+	ErrorLog /home/piratengp/logs/piratenpartei-gp.de_error.log
+	LogLevel warn
+	CustomLog /home/piratengp/logs/piratenpartei-gp.de_access.log combined
+</VirtualHost>
