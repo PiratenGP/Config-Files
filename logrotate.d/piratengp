@@ -1,0 +1,13 @@
+/home/piratengp/logs/*.log {
+	weekly
+	rotate 4
+	missingok
+	compress
+	dateext
+	delaycompress
+	notifempty
+	sharedscripts
+	postrotate
+		/etc/init.d/apache2 reload > /dev/null
+	endscript
+}
