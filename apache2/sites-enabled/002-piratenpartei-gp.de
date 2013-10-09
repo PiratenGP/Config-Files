@@ -10,13 +10,13 @@
 </VirtualHost>
 
 <VirtualHost *:443>
-SSLEngine On
-SSLCertificateFile /home/piratengp/certs/piratenpartei-gp.de.crt
-SSLCertificateKeyFile /home/piratengp/certs/piratenpartei-gp.de.key
-SSLHonorCipherOrder On
-SSLCipherSuite ECDHE-RSA-AES128-SHA256:AES128-GCM-SHA256:RC4:HIGH:!MD5:!aNULL:!EDH
+	
+	GnuTLSEnable on
+	GnuTLSPriorities NORMAL:!DHE-RSA:!DHE-DSS:!AES-256-CBC:%COMPAT
+	GnuTLSCertificateFile /home/piratengp/certs/piratenpartei-gp.de.crt
+	GnuTLSKeyFile /home/piratengp/certs/piratenpartei-gp.de.key
 
-	ServerAdmin webmaster@localhost
+	ServerAdmin r.bendig@piratenpartei-gp.de
 	ServerName piratenpartei-gp.de
 	DocumentRoot /home/piratengp/html/piratenpartei-gp.de
 	<Directory />
@@ -40,4 +40,7 @@ SSLCipherSuite ECDHE-RSA-AES128-SHA256:AES128-GCM-SHA256:RC4:HIGH:!MD5:!aNULL:!E
 	ErrorLog /home/piratengp/logs/piratenpartei-gp.de_error.log
 	LogLevel warn
 	CustomLog /home/piratengp/logs/piratenpartei-gp.de_access.log combined
+
+	CustomLog /var/log/apache-splunk.pipe vhost_combined
+
 </VirtualHost>
